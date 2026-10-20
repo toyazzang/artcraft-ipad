@@ -1,0 +1,18 @@
+[
+  {
+    "id": "photocraft",
+    "name": "PhotoCraft",
+    "repo": "storytold/photocraft",
+    "asset": "photocraft-web-*.zip",
+    "color": "#2f7de1",
+    "description": "이미지 편집 (레이어, 마스크, PSD)"
+  },
+  {
+    "id": "filmcraft",
+    "name": "FilmCraft",
+    "repo": "storytold/filmcraft",
+    "asset": "filmcraft-web-*.zip",
+    "color": "#7a4fd6",
+    "description": "영상 편집 (타임라인, 색, 소리)"
+  }
+]
