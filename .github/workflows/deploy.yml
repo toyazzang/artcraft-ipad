@@ -1,0 +1,53 @@
+name: Deploy ArtCraft apps for iPad
+
+on:
+  schedule:
+    - cron: "23 3 * * *"   # every day, 12:23 Korea time; picks up new upstream releases
+  workflow_dispatch:        # "Run workflow" button in the Actions tab
+  push:
+    branches: [main]
+
+permissions:
+  contents: write           # to keep a backup copy of each downloaded app as a release
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the latest web builds (backup copy is kept automatically)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash scripts/fetch_apps.sh apps.json dl
+
+      - name: Build the site
+        run: |
+          set -euo pipefail
+          for id in $(jq -r '.[].id' apps.json); do
+            mkdir -p "unzipped/$id"
+            unzip -q "dl/$id"/*.zip -d "unzipped/$id"
+          done
+          python3 scripts/build_site.py apps.json unzipped dl site
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
