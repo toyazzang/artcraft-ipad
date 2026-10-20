@@ -1,5 +1,13 @@
 [
   {
+    "id": "vectorcraft",
+    "name": "VectorCraft",
+    "repo": "storytold/vectorcraft",
+    "asset": "vectorcraft-web-*.zip",
+    "color": "#262626",
+    "description": "벡터 드로잉 (패스, 도형, SVG)"
+  },
+  {
     "id": "photocraft",
     "name": "PhotoCraft",
     "repo": "storytold/photocraft",
