@@ -5,7 +5,8 @@
     "repo": "storytold/photocraft",
     "asset": "photocraft-web-*.zip",
     "color": "#2f7de1",
-    "description": "이미지 편집 (레이어, 마스크, PSD)"
+    "description": "이미지 편집 (레이어, 마스크, PSD)",
+    "menubar_touch_px": 32
   },
   {
     "id": "filmcraft",
@@ -14,5 +15,13 @@
     "asset": "filmcraft-web-*.zip",
     "color": "#7a4fd6",
     "description": "영상 편집 (타임라인, 색, 소리)"
+  },
+  {
+    "id": "lightcraft",
+    "name": "LightCraft",
+    "repo": "storytold/lightcraft",
+    "asset": "lightcraft-web-*.zip",
+    "color": "#d98a1f",
+    "description": "RAW 사진 현상 (라이브러리, 보정)"
   }
 ]

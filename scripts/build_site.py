@@ -28,6 +28,8 @@ NOT_PRECACHED_NAMES = {"README.md", "HOSTING.md", "ASSETS.md", "NOTICE", "sw.js"
 NOT_PRECACHED_PREFIXES = ("LICENSE", "licenses/")
 # Host-specific rule files that do nothing on GitHub Pages.
 REMOVED = {"_headers", ".htaccess"}
+# Precompressed copies for servers that can serve them; GitHub Pages compresses by itself.
+REMOVED_SUFFIXES = (".gz", ".br")
 # A file name with a 16-hex-digit content hash never changes under the same name.
 HASHED = re.compile(r"[0-9a-f]{16}")
 
@@ -61,6 +63,36 @@ HEAD_TEMPLATE = """  <link rel="manifest" href="./manifest.webmanifest">
         try {{ if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); }} catch (e) {{}}
       }});
     }}
+  </script>
+"""
+
+# PhotoCraft's menu bar (File, Edit...) ignores finger and Pencil taps: it only opens for a mouse.
+# Taps inside the top bar are handed to the app as mouse input instead. The rest is untouched.
+MENUBAR_FIX = """  <script>
+    (function () {
+      var active = false;
+      function forward(e) {
+        if (e.pointerType !== 'touch' && e.pointerType !== 'pen') return;
+        if (e.pointerType === 'mouse' || !e.isTrusted) return;
+        if (e.type === 'pointerdown') active = e.clientY < __PX__;
+        if (!active) return;
+        e.stopImmediatePropagation(); e.preventDefault();
+        e.target.dispatchEvent(new PointerEvent(e.type, {
+          bubbles: true, cancelable: true, composed: true, clientX: e.clientX, clientY: e.clientY,
+          pointerId: 1, pointerType: 'mouse', isPrimary: true,
+          button: e.type === 'pointermove' ? -1 : 0, buttons: e.type === 'pointerup' ? 0 : 1 }));
+        if (e.type === 'pointerup' || e.type === 'pointercancel') active = false;
+      }
+      ['pointerdown', 'pointermove', 'pointerup', 'pointercancel'].forEach(function (k) {
+        window.addEventListener(k, forward, true);
+      });
+      ['touchstart', 'touchmove', 'touchend'].forEach(function (k) {
+        window.addEventListener(k, function (e) {
+          var t = e.touches[0] || e.changedTouches[0];
+          if (t && t.clientY < __PX__) e.stopImmediatePropagation();
+        }, true);
+      });
+    })();
   </script>
 """
 
@@ -140,6 +172,9 @@ def build_app(app: dict, unzipped: Path, tag: str, out_root: Path) -> None:
     shutil.copytree(src, out)
     for removed in REMOVED:
         (out / removed).unlink(missing_ok=True)
+    for path in list(out.rglob("*")):
+        if path.is_file() and path.name.endswith(REMOVED_SUFFIXES):
+            path.unlink()
 
     index = out / "index.html"
     page = index.read_text(encoding="utf-8")
@@ -148,6 +183,9 @@ def build_app(app: dict, unzipped: Path, tag: str, out_root: Path) -> None:
     if "manifest.webmanifest" in page:
         sys.exit(f"{app_id}: index.html is already patched")
     head = HEAD_TEMPLATE.format(apple_meta=apple_meta_for(page, name))
+    menubar = app.get("menubar_touch_px")
+    if menubar:
+        head += MENUBAR_FIX.replace("__PX__", str(int(menubar)))
     index.write_text(page.replace("</head>", head + "</head>", 1), encoding="utf-8")
 
     manifest = {
