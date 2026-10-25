@@ -31,5 +31,21 @@
     "asset": "lightcraft-web-*.zip",
     "color": "#d98a1f",
     "description": "RAW 사진 현상 (라이브러리, 보정)"
+  },
+  {
+    "id": "cadcraft",
+    "name": "CadCraft",
+    "repo": "storytold/cadcraft",
+    "asset": "cadcraft-web-*.zip",
+    "color": "#128a94",
+    "description": "CAD 설계 (2D 도면, 3D, DXF)"
+  },
+  {
+    "id": "soundcraft",
+    "name": "SoundCraft",
+    "repo": "storytold/soundcraft",
+    "asset": "soundcraft-web-*.zip",
+    "color": "#d64054",
+    "description": "오디오 작업 (멀티트랙 녹음, 편집, 믹싱)"
   }
 ]
