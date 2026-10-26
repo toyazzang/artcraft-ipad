@@ -47,5 +47,45 @@
     "asset": "soundcraft-web-*.zip",
     "color": "#d64054",
     "description": "오디오 작업 (멀티트랙 녹음, 편집, 믹싱)"
+  },
+  {
+    "id": "figcraft",
+    "name": "FigCraft",
+    "repo": "storytold/figcraft",
+    "asset": "figcraft-web-*.zip",
+    "color": "#e0487e",
+    "description": "UI 디자인·프로토타입"
+  },
+  {
+    "id": "effectcraft",
+    "name": "EffectCraft",
+    "repo": "storytold/effectcraft",
+    "asset": "effectcraft-web-*.zip",
+    "color": "#3f46b5",
+    "description": "모션 그래픽·시각 효과"
+  },
+  {
+    "id": "pdfcraft",
+    "name": "PdfCraft",
+    "repo": "storytold/pdfcraft",
+    "asset": "pdfcraft-web-*.zip",
+    "color": "#c0392b",
+    "description": "PDF 보기·편집"
+  },
+  {
+    "id": "designcraft",
+    "name": "DesignCraft",
+    "repo": "storytold/designcraft",
+    "asset": "designcraft-web-*.zip",
+    "color": "#26965c",
+    "description": "페이지 레이아웃·출판 디자인"
+  },
+  {
+    "id": "solidcraft",
+    "name": "SolidCraft",
+    "repo": "tangency-labs/solidcraft",
+    "asset": "solidcraft-web-*.zip",
+    "color": "#485474",
+    "description": "파라메트릭 3D CAD (스케치, 솔리드)"
   }
 ]

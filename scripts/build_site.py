@@ -180,8 +180,12 @@ def build_app(app: dict, unzipped: Path, tag: str, out_root: Path) -> None:
     page = index.read_text(encoding="utf-8")
     if "</head>" not in page:
         sys.exit(f"{app_id}: index.html has no </head>; the upstream page changed, update build_site.py")
-    if "manifest.webmanifest" in page:
+    if "./icons/icon-180.png" in page:
         sys.exit(f"{app_id}: index.html is already patched")
+    # Some upstream builds (EffectCraft) already ship their own manifest and icon links.
+    # Drop them so ours (injected below) are the only ones; our manifest.webmanifest and
+    # sw.js overwrite the upstream files of the same name, so every app updates the same way.
+    page = re.sub(r'[ \t]*<link\b[^>]*\brel="(?:manifest|apple-touch-icon)"[^>]*>[ \t]*\n?', "", page)
     head = HEAD_TEMPLATE.format(apple_meta=apple_meta_for(page, name))
     menubar = app.get("menubar_touch_px")
     if menubar:
@@ -198,7 +202,7 @@ def build_app(app: dict, unzipped: Path, tag: str, out_root: Path) -> None:
         ],
     }
     (out / "manifest.webmanifest").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
-    shutil.copytree(ICONS / app_id, out / "icons")
+    shutil.copytree(ICONS / app_id, out / "icons", dirs_exist_ok=True)  # some upstream builds ship their own icons/ folder
 
     files = list_files(out)
     static = ["./" + f for f in files if HASHED.search(Path(f).name)]

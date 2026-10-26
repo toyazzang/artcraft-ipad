@@ -1,8 +1,8 @@
-# ArtCraft for iPad (VectorCraft · PhotoCraft · FilmCraft · LightCraft · CadCraft · SoundCraft)
+# ArtCraft for iPad (VectorCraft · PhotoCraft · FilmCraft · LightCraft · CadCraft · SoundCraft · FigCraft · EffectCraft · PdfCraft · DesignCraft · SolidCraft)
 
 ArtCraft의 오픈소스 앱(MIT / Apache-2.0)을 iPad 홈 화면 앱처럼 쓰기 위한 개인용 배포 저장소입니다.
 하루에 한 번 원본 웹 빌드를 받아 오프라인 캐시 파일을 붙여 GitHub Pages에 올립니다.
-받은 zip은 이 저장소의 Releases(`backup-vectorcraft`, `backup-photocraft`, `backup-filmcraft`, `backup-lightcraft`, `backup-cadcraft`, `backup-soundcraft`)에 자동으로 백업되고,
+받은 zip은 이 저장소의 Releases(`backup-vectorcraft`, `backup-photocraft`, `backup-filmcraft`, `backup-lightcraft`, `backup-cadcraft`, `backup-soundcraft`, `backup-figcraft`, `backup-effectcraft`, `backup-pdfcraft`, `backup-designcraft`, `backup-solidcraft`)에 자동으로 백업되고,
 원본이 사라지거나 검증(SHA256)에 실패하면 백업본으로 사이트를 계속 만듭니다.
 
 - 앱 목록: `apps.json` (앱을 더 넣으려면 항목만 추가)
@@ -19,7 +19,7 @@ ArtCraft의 오픈소스 앱(MIT / Apache-2.0)을 iPad 홈 화면 앱처럼 쓰�
 
 ## iPad
 1. Safari로 위 주소를 열고, 앱 카드를 눌러 연 뒤 공유 → 홈 화면에 추가
-2. 인터넷이 되는 곳에서 홈 화면 아이콘으로 1~2분 켜 둠 (VectorCraft 약 68MB, FilmCraft 약 41MB, LightCraft 약 26MB, CadCraft 약 23MB, SoundCraft 약 16MB)
+2. 인터넷이 되는 곳에서 홈 화면 아이콘으로 1~2분 켜 둠 (VectorCraft 약 68MB, FilmCraft 약 41MB, LightCraft 약 26MB, CadCraft 약 23MB, SoundCraft 약 16MB, FigCraft 약 24MB, EffectCraft 약 65MB, PdfCraft 약 43MB, DesignCraft 약 55MB, SolidCraft 약 86MB)
 3. 비행기 모드에서 아이콘을 눌러 열리는지 확인
 
 새 버전은 하루 안에 사이트에 반영되고, iPad에서는 온라인으로 앱을 연 다음 실행부터 적용됩니다.
