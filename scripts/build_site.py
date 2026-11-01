@@ -176,6 +176,17 @@ def build_app(app: dict, unzipped: Path, tag: str, out_root: Path) -> None:
         if path.is_file() and path.name.endswith(REMOVED_SUFFIXES):
             path.unlink()
 
+    # PhotoCraft v0.17.0 and v0.18.0 ship the app's glue in app/ but its browser snippets only
+    # in the top-level snippets/, so the glue's import of ./snippets/... 404s and the page stays
+    # on "Loading PhotoCraft..." (it fails the same way on any plain static server). Put a copy
+    # where the glue looks. Nothing happens when app/snippets already exists, so builds that
+    # are packaged correctly are left alone.
+    app_dir, snippets = out / "app", out / "snippets"
+    if app_dir.is_dir() and snippets.is_dir() and not (app_dir / "snippets").exists():
+        if any("snippets/" in js.read_text(encoding="utf-8", errors="ignore") for js in app_dir.glob("*.js")):
+            shutil.copytree(snippets, app_dir / "snippets")
+            print(f"{app_id}: copied snippets/ into app/ (upstream packaging gap)")
+
     index = out / "index.html"
     page = index.read_text(encoding="utf-8")
     if "</head>" not in page:
