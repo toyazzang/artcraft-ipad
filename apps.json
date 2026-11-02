@@ -87,5 +87,13 @@
     "asset": "solidcraft-web-*.zip",
     "color": "#485474",
     "description": "파라메트릭 3D CAD (스케치, 솔리드)"
+  },
+  {
+    "id": "texturecraft",
+    "name": "TextureCraft",
+    "repo": "storytold/texturecraft",
+    "asset": "texturecraft-web-*.zip",
+    "color": "#8e5434",
+    "description": "3D 텍스처 페인팅 (PBR 재질, 레이어, 마스크)"
   }
 ]
