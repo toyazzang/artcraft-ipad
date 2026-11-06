@@ -95,5 +95,37 @@
     "asset": "texturecraft-web-*.zip",
     "color": "#8e5434",
     "description": "3D 텍스처 페인팅 (PBR 재질, 레이어, 마스크)"
+  },
+  {
+    "id": "wordcraft",
+    "name": "WordCraft",
+    "repo": "storytold/wordcraft",
+    "asset": "wordcraft-web-*.zip",
+    "color": "#174a8c",
+    "description": "문서 작성 (워드 프로세서, docx)"
+  },
+  {
+    "id": "deckcraft",
+    "name": "DeckCraft",
+    "repo": "storytold/deckcraft",
+    "asset": "deckcraft-web-*.zip",
+    "color": "#e0662b",
+    "description": "프레젠테이션 (슬라이드, pptx)"
+  },
+  {
+    "id": "gridcraft",
+    "name": "GridCraft",
+    "repo": "storytold/gridcraft",
+    "asset": "gridcraft-web-*.zip",
+    "color": "#6a9a1f",
+    "description": "스프레드시트 (표, 수식)"
+  },
+  {
+    "id": "materialcraft",
+    "name": "MaterialCraft",
+    "repo": "storytold/materialcraft",
+    "asset": "materialcraft-web-*.zip",
+    "color": "#c9a227",
+    "description": "절차적 재질 디자인 (노드 기반)"
   }
 ]
